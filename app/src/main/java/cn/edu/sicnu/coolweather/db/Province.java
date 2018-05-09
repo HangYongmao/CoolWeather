@@ -1,10 +1,12 @@
 package cn.edu.sicnu.coolweather.db;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by HYM on 2018/5/9 0009.
  */
 
-public class Province {
+public class Province extends DataSupport{
 
     private int id;
     // 省的名字
