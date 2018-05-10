@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -761,3 +762,13 @@
   </body>
 </html>
 
+=======
+# coolweather
+
+## 说明
+
+### 遍历全国省市县数据
+![](https://github.com/HangYongmao/CoolWeather/blob/master/img/1.png)
+![](https://github.com/HangYongmao/CoolWeather/blob/master/img/2.png)
+![](https://github.com/HangYongmao/CoolWeather/blob/master/img/3.png)
+>>>>>>> 7d7d11401c6c25b22e1bb5f709d9c279f10b61be
