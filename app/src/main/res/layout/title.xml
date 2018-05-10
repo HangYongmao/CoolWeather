@@ -17,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:text="龙泉驿"
         android:textColor="#fff"
         android:textSize="20sp" />
 
@@ -27,6 +28,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
+        android:text="19:47"
         android:textColor="#fff"
         android:textSize="16sp" />
 
