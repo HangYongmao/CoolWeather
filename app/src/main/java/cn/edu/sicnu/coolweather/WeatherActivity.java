@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,7 @@ public class WeatherActivity extends AppCompatActivity {
     private LinearLayout forecastLayout;
     private TextView aqiText;
     private TextView pm25Text;
+    private TextView qltyText;
     private TextView comfortText;
     private TextView carWashText;
     private TextView sportText;
@@ -75,6 +77,7 @@ public class WeatherActivity extends AppCompatActivity {
         forecastLayout = (LinearLayout) findViewById(R.id.forecast_layout);
         aqiText = (TextView) findViewById(R.id.aqi_text);
         pm25Text = (TextView) findViewById(R.id.pm25_text);
+        qltyText = (TextView) findViewById(R.id.qlty_text);
         comfortText = (TextView) findViewById(R.id.comfort_text);
         carWashText = (TextView) findViewById(R.id.car_wash_text);
         sportText = (TextView) findViewById(R.id.sport_text);
@@ -218,6 +221,7 @@ public class WeatherActivity extends AppCompatActivity {
         if (weather.aqi != null) {
             aqiText.setText(weather.aqi.city.aqi);
             pm25Text.setText(weather.aqi.city.pm25);
+            qltyText.setText(weather.aqi.city.qlty);
         }
         String comfort = "舒适度：" + weather.suggestion.comfort.info;
         String carWash = "洗车指数：" + weather.suggestion.carWash.info;

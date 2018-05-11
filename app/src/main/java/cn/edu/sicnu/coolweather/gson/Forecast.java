@@ -16,9 +16,6 @@ public class Forecast {
     @SerializedName("cond")
     public More more;
 
-    @SerializedName("hum")
-    public String  hum;
-
     public class Temperature {
         public String max;
         public String min;
