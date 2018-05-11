@@ -12,3 +12,9 @@
 
 ### 加载必应每日一图
 ![](https://github.com/HangYongmao/CoolWeather/blob/master/img/5.png)
+
+### 下拉刷新 更新天气
+![](https://github.com/HangYongmao/CoolWeather/blob/master/img/6.png)
+
+### 手动切换城市
+![](https://github.com/HangYongmao/CoolWeather/blob/master/img/7.png)

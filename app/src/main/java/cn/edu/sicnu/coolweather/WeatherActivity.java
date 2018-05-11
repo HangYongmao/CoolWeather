@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import cn.edu.sicnu.coolweather.gson.Forecast;
 import cn.edu.sicnu.coolweather.gson.Weather;
+import cn.edu.sicnu.coolweather.service.AutoUpdateService;
 import cn.edu.sicnu.coolweather.util.HttpUtil;
 import cn.edu.sicnu.coolweather.util.Utility;
 import okhttp3.Call;
@@ -215,5 +216,8 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 }
