@@ -1,4 +1,5 @@
 # CoolWeather
+![](https://github.com/HangYongmao/CoolWeather/blob/master/img/logo.png)
 
 ## 说明
 
@@ -18,3 +19,6 @@
 
 ### 手动切换城市
 ![](https://github.com/HangYongmao/CoolWeather/blob/master/img/7.png)
+
+### 增加后台自动更新天气
+### 修改程序图标和名称
