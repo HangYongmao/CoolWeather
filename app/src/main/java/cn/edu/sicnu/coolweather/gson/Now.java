@@ -18,10 +18,6 @@ public class Now {
     @SerializedName("hum")
     public String now_hum;
 
-    // 降雨量mm
-    @SerializedName("pcpn")
-    public String now_pcpn;
-
     // 能见度
     @SerializedName("vis")
     public String now_vis;

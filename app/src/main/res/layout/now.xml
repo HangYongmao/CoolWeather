@@ -37,7 +37,7 @@
             android:layout_marginTop="15dp"
             android:text="星期一 今天"
             android:textColor="#fff"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,45 +62,13 @@
                         android:layout_gravity="center"
                         android:text="14%"
                         android:textColor="#fff"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="湿度"
-                        android:textColor="#fff" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/now_pcpn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0.0mm"
-                        android:textColor="#fff"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="降雨量"
                         android:textColor="#fff" />
 
                 </LinearLayout>
@@ -125,7 +93,7 @@
                         android:layout_gravity="center"
                         android:text="10km"
                         android:textColor="#fff"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -157,7 +125,7 @@
                         android:layout_gravity="center"
                         android:text="东南风"
                         android:textColor="#fff"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -188,7 +156,7 @@
                         android:layout_gravity="center"
                         android:text="微风"
                         android:textColor="#fff"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"

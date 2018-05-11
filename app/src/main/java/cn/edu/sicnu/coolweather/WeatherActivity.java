@@ -85,7 +85,6 @@ public class WeatherActivity extends AppCompatActivity {
         weatherInfoText = (TextView) findViewById(R.id.weather_info_text);
         now_hum = (TextView) findViewById(R.id.now_hum);
         now_dir = (TextView) findViewById(R.id.now_dir);
-        now_pcpn = (TextView) findViewById(R.id.now_pcpn);
         now_sc = (TextView) findViewById(R.id.now_sc);
         now_vis = (TextView) findViewById(R.id.now_vis);
         forecastLayout = (LinearLayout) findViewById(R.id.forecast_layout);
@@ -211,7 +210,6 @@ public class WeatherActivity extends AppCompatActivity {
         String weatherInfo = weather.now.more.info;
         String st_now_dir = weather.now.now_dir;
         String st_now_hum = weather.now.now_hum;
-        String st_now_pcpn = weather.now.now_pcpn;
         String st_now_sc = weather.now.now_sc;
         String st_now_vis = weather.now.now_vis;
         String titleName = "";
@@ -226,11 +224,14 @@ public class WeatherActivity extends AppCompatActivity {
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
         now_dir.setText(st_now_dir);
-        now_vis.setText(st_now_vis);
+        now_vis.setText(st_now_vis + "km");
         now_sc.setText(st_now_sc);
-        now_hum.setText(st_now_hum);
-        now_pcpn.setText(st_now_pcpn);
+        now_hum.setText(st_now_hum + "%");
 
+        long time = System.currentTimeMillis();
+        Date date = new Date(time);
+        SimpleDateFormat format = new SimpleDateFormat("EEEE");
+        now_week.setText(format.format(date) + " 今天");
         forecastLayout.removeAllViews();
         for (Forecast forecast : weather.forecastList) {
             View view = LayoutInflater.from(this).inflate(R.layout.forecast_item, forecastLayout, false);
