@@ -186,10 +186,19 @@ public class WeatherActivity extends AppCompatActivity {
     // 处理并展示Weather实体类中的数据
     private void showWeatherInfo(Weather weather) {
         String cityName = weather.basic.cityName;
+        String adminAreaName = weather.basic.adminAreaName;
+        String parentCityName = weather.basic.parentCityName;
         String updateTime = weather.basic.update.updateTime.split(" ")[1];
         String degree = weather.now.temperature + "℃";
         String weatherInfo = weather.now.more.info;
-        titleCity.setText(cityName);
+        String titleName = "";
+        if (adminAreaName.equals(parentCityName))
+            titleName = adminAreaName;
+        else
+            titleName = adminAreaName + " " + parentCityName;
+        if (!cityName.equals(parentCityName))
+            titleName = titleName + " " + cityName;
+        titleCity.setText(titleName);
         titleUpdateTime.setText(updateTime);
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
