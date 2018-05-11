@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import cn.edu.sicnu.coolweather.gson.Forecast;
 import cn.edu.sicnu.coolweather.gson.Weather;
@@ -44,6 +47,12 @@ public class WeatherActivity extends AppCompatActivity {
     private TextView titleUpdateTime;
     private TextView degreeText;
     private TextView weatherInfoText;
+    private TextView now_hum;
+    private TextView now_pcpn;
+    private TextView now_vis;
+    private TextView now_dir;
+    private TextView now_sc;
+    private TextView now_week;
     private LinearLayout forecastLayout;
     private TextView aqiText;
     private TextView pm25Text;
@@ -74,11 +83,17 @@ public class WeatherActivity extends AppCompatActivity {
         titleUpdateTime = (TextView) findViewById(R.id.title_update_time);
         degreeText = (TextView) findViewById(R.id.degree_text);
         weatherInfoText = (TextView) findViewById(R.id.weather_info_text);
+        now_hum = (TextView) findViewById(R.id.now_hum);
+        now_dir = (TextView) findViewById(R.id.now_dir);
+        now_pcpn = (TextView) findViewById(R.id.now_pcpn);
+        now_sc = (TextView) findViewById(R.id.now_sc);
+        now_vis = (TextView) findViewById(R.id.now_vis);
         forecastLayout = (LinearLayout) findViewById(R.id.forecast_layout);
         aqiText = (TextView) findViewById(R.id.aqi_text);
         pm25Text = (TextView) findViewById(R.id.pm25_text);
         qltyText = (TextView) findViewById(R.id.qlty_text);
         comfortText = (TextView) findViewById(R.id.comfort_text);
+        now_week = (TextView) findViewById(R.id.now_week);
         carWashText = (TextView) findViewById(R.id.car_wash_text);
         sportText = (TextView) findViewById(R.id.sport_text);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -194,6 +209,11 @@ public class WeatherActivity extends AppCompatActivity {
         String updateTime = weather.basic.update.updateTime.split(" ")[1];
         String degree = weather.now.temperature + "℃";
         String weatherInfo = weather.now.more.info;
+        String st_now_dir = weather.now.now_dir;
+        String st_now_hum = weather.now.now_hum;
+        String st_now_pcpn = weather.now.now_pcpn;
+        String st_now_sc = weather.now.now_sc;
+        String st_now_vis = weather.now.now_vis;
         String titleName = "";
         if (adminAreaName.equals(parentCityName))
             titleName = adminAreaName;
@@ -205,6 +225,12 @@ public class WeatherActivity extends AppCompatActivity {
         titleUpdateTime.setText(updateTime);
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
+        now_dir.setText(st_now_dir);
+        now_vis.setText(st_now_vis);
+        now_sc.setText(st_now_sc);
+        now_hum.setText(st_now_hum);
+        now_pcpn.setText(st_now_pcpn);
+
         forecastLayout.removeAllViews();
         for (Forecast forecast : weather.forecastList) {
             View view = LayoutInflater.from(this).inflate(R.layout.forecast_item, forecastLayout, false);
