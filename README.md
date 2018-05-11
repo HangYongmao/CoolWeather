@@ -21,4 +21,8 @@
 ![](https://github.com/HangYongmao/CoolWeather/blob/master/img/7.png)
 
 ### 增加后台自动更新天气
+
 ### 修改程序图标和名称
+
+### 增加双击返回键退出应用
+![](https://github.com/HangYongmao/CoolWeather/blob/master/img/8.png)
