@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="龙泉驿"
+        android:text="四川 成都 龙泉驿"
         android:textColor="#fff"
         android:textSize="20sp" />
 
