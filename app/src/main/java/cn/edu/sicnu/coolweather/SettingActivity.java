@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +12,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,6 +86,19 @@ public class SettingActivity extends AppCompatActivity {
         getSystemLanguage();
         getSystemNetworkStatus();
         getSystemDate();
+
+        // 点击logo跳转浏览器
+        ImageView setting_logo = findViewById(R.id.image_logo);
+        setting_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://github.com/HangYongmao/CoolWeather");
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean isNetworkConnected(Context context) {
