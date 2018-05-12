@@ -2,9 +2,13 @@ package cn.edu.sicnu.coolweather;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -23,8 +27,11 @@ import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,9 +40,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import cn.edu.sicnu.coolweather.gson.Weather;
+
 public class SettingActivity extends AppCompatActivity {
 
     private TextView tv_cache;
+    Notification.Builder builder;
+    RemoteViews remoteViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +141,7 @@ public class SettingActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(), "清理中...", Toast.LENGTH_SHORT).show();
                 try {
                     DataCleanManager.cleanInternalCache(getApplicationContext());
+                    DataCleanManager.cleanApplicationData(getApplicationContext());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -137,6 +149,47 @@ public class SettingActivity extends AppCompatActivity {
                 tv_cache.setText("0.0KB");
             }
         });
+
+        // 设置通知栏
+        Switch switch1 = findViewById(R.id.switch_notification);
+        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    showNotification();
+                } else {
+                    //非选中时 do some thing
+                    closeNotification();
+                }
+            }
+        });
+    }
+
+    public void showNotification() {
+        initNotification();
+    }
+
+    public void closeNotification() {
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotificationManager.cancel(100);
+    }
+
+    public void initNotification() {
+        builder = new Notification.Builder(this);
+        builder.setSmallIcon(R.mipmap.logo)
+                .setOngoing(true)       // 设置是否常驻,true为常驻
+                .setTicker("酷欧天气"); //设置提示
+
+        remoteViews = new RemoteViews(getPackageName(), R.layout.notification_layout);
+        builder.setContent(remoteViews);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(pendingIntent);
+
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotificationManager.notify(100, builder.build());
     }
 
     public boolean isNetworkConnected(Context context) {
