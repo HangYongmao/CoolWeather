@@ -48,6 +48,10 @@ public class SettingActivity extends AppCompatActivity {
     Notification.Builder builder;
     RemoteViews remoteViews;
 
+    String weather_temperature;
+    String weather_time;
+    String weather_city;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +69,12 @@ public class SettingActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        // 传递数据
+        Intent intent = getIntent();
+        weather_temperature = intent.getStringExtra("weather_temperature");
+        weather_time = intent.getStringExtra("weather_time");
+        weather_city = intent.getStringExtra("weather_city");
 
         View about = findViewById(R.id.setting_about);
         about.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +193,10 @@ public class SettingActivity extends AppCompatActivity {
 
         remoteViews = new RemoteViews(getPackageName(), R.layout.notification_layout);
         builder.setContent(remoteViews);
+
+        remoteViews.setTextViewText(R.id.textView_tmp, weather_temperature);
+        remoteViews.setTextViewText(R.id.textView_time, weather_time);
+        remoteViews.setTextViewText(R.id.textView_city, weather_city);
 
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);

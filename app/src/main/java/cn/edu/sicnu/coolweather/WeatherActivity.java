@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -41,6 +42,8 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class WeatherActivity extends AppCompatActivity {
+
+    private static final String TAG = "WeatherActivity";
 
     public DrawerLayout drawerLayout;
     private Button navButton;
@@ -68,6 +71,8 @@ public class WeatherActivity extends AppCompatActivity {
 
     public SwipeRefreshLayout swipeRefresh;
     private String mWeatherId;
+
+    Weather weather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,9 +116,10 @@ public class WeatherActivity extends AppCompatActivity {
         String weatherString = prefs.getString("weather", null);
         if (weatherString != null) {
             // 有缓存时直接解析天气数据
-            Weather weather = Utility.handleWeatherResponse(weatherString);
-            mWeatherId = weather.basic.weatherId;
-            showWeatherInfo(weather);
+            Weather mWeather = Utility.handleWeatherResponse(weatherString);
+            mWeatherId = mWeather.basic.weatherId;
+            weather = mWeather;
+            showWeatherInfo(mWeather);
         } else {
             // 无缓存时去服务器查询天气
             mWeatherId = getIntent().getStringExtra("weather_id");
@@ -149,6 +155,12 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), SettingActivity.class);
+                intent.putExtra("weather_temperature", weather.now.temperature + "℃");
+                intent.putExtra("weather_time", weather.basic.update.updateTime.split(" ")[1] + "");
+                intent.putExtra("weather_city", weather.basic.cityName + "");
+                Log.d(TAG, "onClick: " + weather.now.temperature + "℃");
+                Log.d(TAG, "onClick: " + weather.basic.update.updateTime.split(" ")[1] + "");
+                Log.d(TAG, "onClick: " + weather.basic.cityName + "");
                 startActivity(intent);
             }
         });
@@ -161,7 +173,7 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
-                final Weather weather = Utility.handleWeatherResponse(responseText);
+                weather = Utility.handleWeatherResponse(responseText);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
