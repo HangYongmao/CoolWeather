@@ -79,25 +79,9 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        // 获取当前系统语言
-        TextView languageText = findViewById(R.id.language);
-        Locale locale = Locale.getDefault();
-        languageText.setText(locale.getLanguage() + "-" + locale.getCountry());
-
-        // 获取系统时间
-        TextView date_now = findViewById(R.id.date_now);
-        long time = System.currentTimeMillis();
-        Date date = new Date(time);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd EEEE");
-        date_now.setText(format.format(date));
-
-        // 网络状态
-        TextView network_status = findViewById(R.id.network_status);
-        if (isNetworkConnected(network_status.getContext()) == true) {
-            network_status.setText("网络可用");
-        } else {
-            network_status.setText("网络不可用");
-        }
+        getSystemLanguage();
+        getSystemNetworkStatus();
+        getSystemDate();
     }
 
     public boolean isNetworkConnected(Context context) {
@@ -109,5 +93,39 @@ public class SettingActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSystemLanguage();
+        getSystemNetworkStatus();
+        getSystemDate();
+    }
+
+    public void getSystemLanguage() {
+        // 获取当前系统语言
+        TextView languageText = findViewById(R.id.language);
+        Locale locale = Locale.getDefault();
+        languageText.setText(locale.getLanguage() + "-" + locale.getCountry());
+    }
+
+    public void getSystemNetworkStatus() {
+        // 网络状态
+        TextView network_status = findViewById(R.id.network_status);
+        if (isNetworkConnected(network_status.getContext()) == true) {
+            network_status.setText("网络可用");
+        } else {
+            network_status.setText("网络不可用");
+        }
+    }
+
+    public void getSystemDate() {
+        // 获取系统时间
+        TextView date_now = findViewById(R.id.date_now);
+        long time = System.currentTimeMillis();
+        Date date = new Date(time);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd EEEE");
+        date_now.setText(format.format(date));
     }
 }
