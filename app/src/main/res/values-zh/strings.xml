@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">酷欧天气</string>
     <string name="setting">设置</string>
+    <string name="notification_off">关</string>
+    <string name="notification_on">开</string>
 </resources>
