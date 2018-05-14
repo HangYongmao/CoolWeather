@@ -57,7 +57,11 @@ public class WeatherActivity extends AppCompatActivity {
     private TextView now_pcpn;
     private TextView now_vis;
     private TextView now_dir;
+    private TextView now_fl;
+    private TextView now_spd;
+    private TextView now_pres;
     private TextView now_sc;
+
     private TextView now_week;
     private LinearLayout forecastLayout;
     private TextView aqiText;
@@ -73,6 +77,8 @@ public class WeatherActivity extends AppCompatActivity {
     private String mWeatherId;
 
     Weather weather;
+
+    String titleName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +106,10 @@ public class WeatherActivity extends AppCompatActivity {
         now_dir = (TextView) findViewById(R.id.now_dir);
         now_sc = (TextView) findViewById(R.id.now_sc);
         now_vis = (TextView) findViewById(R.id.now_vis);
+        now_fl = (TextView) findViewById(R.id.now_fl);
+        now_spd = (TextView) findViewById(R.id.now_spd);
+        now_pcpn = (TextView) findViewById(R.id.now_pcpn);
+        now_pres = (TextView) findViewById(R.id.now_pres);
         forecastLayout = (LinearLayout) findViewById(R.id.forecast_layout);
         aqiText = (TextView) findViewById(R.id.aqi_text);
         pm25Text = (TextView) findViewById(R.id.pm25_text);
@@ -169,6 +179,7 @@ public class WeatherActivity extends AppCompatActivity {
     // 根据天气id请求城市天气信息
     public void requestWeather(final String weatherId) {
         String weatherUrl = "http://guolin.tech/api/weather?cityid=" + weatherId + "&key=2b940224cf05488ababbee882214e315";
+        Log.d(TAG, "requestWeather: " + weatherUrl);
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
@@ -242,7 +253,10 @@ public class WeatherActivity extends AppCompatActivity {
         String st_now_hum = weather.now.now_hum;
         String st_now_sc = weather.now.now_sc;
         String st_now_vis = weather.now.now_vis;
-        String titleName = "";
+        String st_now_fl = weather.now.now_fl;
+        String st_now_spd = weather.now.now_spd;
+        String st_now_pcpn = weather.now.now_pcpn;
+        String st_now_pres = weather.now.now_pres;
         if (adminAreaName.equals(parentCityName))
             titleName = adminAreaName;
         else
@@ -257,6 +271,10 @@ public class WeatherActivity extends AppCompatActivity {
         now_vis.setText(st_now_vis + "km");
         now_sc.setText(st_now_sc);
         now_hum.setText(st_now_hum + "%");
+        now_fl.setText(st_now_fl + "℃");
+        now_spd.setText(st_now_spd + "Kmph");
+        now_pcpn.setText(st_now_pcpn + "mm");
+        now_pres.setText(st_now_pres + "Pa");
 
         long time = System.currentTimeMillis();
         Date date = new Date(time);
