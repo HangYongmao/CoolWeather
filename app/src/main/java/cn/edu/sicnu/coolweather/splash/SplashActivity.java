@@ -9,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar;
+
 import cn.edu.sicnu.coolweather.MainActivity;
 import cn.edu.sicnu.coolweather.R;
 
@@ -23,6 +25,13 @@ public class SplashActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+
+        // 个性化进度条
+        DilatingDotsProgressBar mDilatingDotsProgressBar = (DilatingDotsProgressBar) findViewById(R.id.progress);
+
+        // show progress bar and start animating
+        mDilatingDotsProgressBar.showNow();
+
         // 延时
         handler.postDelayed(new Runnable() {
             @Override
@@ -34,6 +43,6 @@ public class SplashActivity extends AppCompatActivity {
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        }, 4000);
+        }, 3000);
     }
 }
