@@ -167,10 +167,10 @@ public class WeatherActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), SettingActivity.class);
                 intent.putExtra("weather_temperature", weather.now.temperature + "℃");
                 intent.putExtra("weather_time", weather.basic.update.updateTime.split(" ")[1] + "");
-                intent.putExtra("weather_city", weather.basic.cityName + "");
+                intent.putExtra("weather_city", titleName);
                 Log.d(TAG, "onClick: " + weather.now.temperature + "℃");
                 Log.d(TAG, "onClick: " + weather.basic.update.updateTime.split(" ")[1] + "");
-                Log.d(TAG, "onClick: " + weather.basic.cityName + "");
+                Log.d(TAG, "onClick: " + titleName);
                 startActivity(intent);
             }
         });
