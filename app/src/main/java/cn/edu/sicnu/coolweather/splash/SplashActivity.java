@@ -13,6 +13,7 @@ import com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar;
 
 import cn.edu.sicnu.coolweather.MainActivity;
 import cn.edu.sicnu.coolweather.R;
+import cn.edu.sicnu.coolweather.guide.GuideActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -40,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
                 AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getDrawable();
                 animationDrawable.start();
 
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
                 startActivity(intent);
             }
         }, 3000);
