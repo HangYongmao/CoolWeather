@@ -114,7 +114,7 @@ public class GuideActivity extends AppCompatActivity {
             }
         });
         // 设置滑动特效（可加可不加）
-//        viewPager.setPageTransformer(true, new DepthPageTransformer());
+        viewPager.setPageTransformer(true, new DepthPageTransformer());
     }
 
     // 用于初始化相关控件的方法
