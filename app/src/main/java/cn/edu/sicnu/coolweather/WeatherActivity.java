@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -35,6 +36,7 @@ import java.util.Date;
 import cn.edu.sicnu.coolweather.gson.Forecast;
 import cn.edu.sicnu.coolweather.gson.Weather;
 import cn.edu.sicnu.coolweather.service.AutoUpdateService;
+import cn.edu.sicnu.coolweather.tools.UITools;
 import cn.edu.sicnu.coolweather.util.HttpUtil;
 import cn.edu.sicnu.coolweather.util.Utility;
 import okhttp3.Call;
@@ -122,6 +124,7 @@ public class WeatherActivity extends AppCompatActivity {
         navButton = (Button) findViewById(R.id.nav_button);
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+        UITools.elasticPadding((HorizontalScrollView) findViewById(R.id.horizontalScrollView), 500);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
         if (weatherString != null) {
