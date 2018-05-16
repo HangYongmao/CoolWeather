@@ -81,6 +81,8 @@ public class WeatherActivity extends AppCompatActivity {
     Weather weather;
 
     String titleName = "";
+    String titleTime = "";
+    String titleTmp = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,11 +170,11 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), SettingActivity.class);
-                intent.putExtra("weather_temperature", weather.now.temperature + "℃");
-                intent.putExtra("weather_time", weather.basic.update.updateTime.split(" ")[1] + "");
+                intent.putExtra("weather_temperature", titleTmp + "℃");
+                intent.putExtra("weather_time", titleTime);
                 intent.putExtra("weather_city", titleName);
-                Log.d(TAG, "onClick: " + weather.now.temperature + "℃");
-                Log.d(TAG, "onClick: " + weather.basic.update.updateTime.split(" ")[1] + "");
+                Log.d(TAG, "onClick: " + titleTmp + "℃");
+                Log.d(TAG, "onClick: " + titleTime);
                 Log.d(TAG, "onClick: " + titleName);
                 startActivity(intent);
             }
@@ -251,7 +253,10 @@ public class WeatherActivity extends AppCompatActivity {
         String adminAreaName = weather.basic.adminAreaName;
         String parentCityName = weather.basic.parentCityName;
         String updateTime = weather.basic.update.updateTime.split(" ")[1];
+        titleTime = weather.basic.update.updateTime.split(" ")[1];
         String degree = weather.now.temperature + "℃";
+        titleTmp = weather.now.temperature;
+
         String weatherInfo = weather.now.more.info;
         String st_now_dir = weather.now.now_dir;
         String st_now_hum = weather.now.now_hum;
