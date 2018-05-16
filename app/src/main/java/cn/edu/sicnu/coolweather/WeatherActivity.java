@@ -129,10 +129,9 @@ public class WeatherActivity extends AppCompatActivity {
         String weatherString = prefs.getString("weather", null);
         if (weatherString != null) {
             // 有缓存时直接解析天气数据
-            Weather mWeather = Utility.handleWeatherResponse(weatherString);
-            mWeatherId = mWeather.basic.weatherId;
-            weather = mWeather;
-            showWeatherInfo(mWeather);
+            Weather weather = Utility.handleWeatherResponse(weatherString);
+            mWeatherId = weather.basic.weatherId;
+            showWeatherInfo(weather);
         } else {
             // 无缓存时去服务器查询天气
             mWeatherId = getIntent().getStringExtra("weather_id");
@@ -154,6 +153,7 @@ public class WeatherActivity extends AppCompatActivity {
         } else {
             loadBingPic();
         }
+
         // 侧滑菜单-->切换城市
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,7 +187,7 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
-                weather = Utility.handleWeatherResponse(responseText);
+                final Weather weather = Utility.handleWeatherResponse(responseText);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -195,6 +195,7 @@ public class WeatherActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
                             editor.putString("weather", responseText);
                             editor.apply();
+                            mWeatherId = weather.basic.weatherId;
                             showWeatherInfo(weather);
                         } else {
                             Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();

@@ -15,39 +15,37 @@ import android.widget.ScrollView;
 
 public class UITools {
 
-    /**
-     * HorizontalScrollView添加阻尼效果
+    /**HorizontalScrollView添加阻尼效果
      * ScrollView效果不太好
      * 利用父元素的Padding给ScrollView添加弹性
-     *
      * @param scrollView
      * @param padding
      */
-    public static void elasticPadding(final ScrollView scrollView, final int padding) {
+    public static void elasticPadding(final ScrollView scrollView, final int padding){
         View child = scrollView.getChildAt(0);
         //记录以前的padding
         final int oldpt = child.getPaddingTop();
         final int oldpb = child.getPaddingBottom();
         //设置新的padding
-        child.setPadding(child.getPaddingLeft(), padding + oldpt, child.getPaddingRight(), padding + oldpb);
+        child.setPadding(child.getPaddingLeft(), padding+oldpt, child.getPaddingRight(), padding+oldpb);
 
         //添加视图布局完成事件监听
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             private boolean inTouch = false; //手指是否按下状态
 
             @SuppressLint("NewApi")
-            private void disableOverScroll() {
+            private void disableOverScroll(){
                 scrollView.setOverScrollMode(ScrollView.OVER_SCROLL_NEVER);
             }
 
             /**  滚动到顶部 */
-            private void scrollToTop() {
-                scrollView.smoothScrollTo(scrollView.getScrollX(), padding - oldpt);
+            private void scrollToTop(){
+                scrollView.smoothScrollTo(scrollView.getScrollX(), padding-oldpt);
             }
 
             /** 滚动到底部 */
-            private void scrollToBottom() {
-                scrollView.smoothScrollTo(scrollView.getScrollX(), scrollView.getChildAt(0).getBottom() - scrollView.getMeasuredHeight() - padding + oldpb);
+            private void scrollToBottom(){
+                scrollView.smoothScrollTo(scrollView.getScrollX(), scrollView.getChildAt(0).getBottom()-scrollView.getMeasuredHeight()-padding+oldpb);
             }
 
             /** 检测scrollView结束以后,复原位置 */
@@ -55,10 +53,10 @@ public class UITools {
                 @Override
                 public void run() {
                     int y = scrollView.getScrollY();
-                    int bottom = scrollView.getChildAt(0).getBottom() - y - scrollView.getMeasuredHeight();
-                    if (y <= padding && !inTouch) {
+                    int bottom = scrollView.getChildAt(0).getBottom()-y-scrollView.getMeasuredHeight();
+                    if(y <= padding && !inTouch){
                         scrollToTop();
-                    } else if (bottom <= padding && !inTouch) {
+                    }else if(bottom<=padding && !inTouch){
                         scrollToBottom();
                     }
                 }
@@ -72,16 +70,16 @@ public class UITools {
                 //设置最小高度
                 //scrollView.getChildAt(0).setMinimumHeight(scrollView.getMeasuredHeight());
                 //取消overScroll效果
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
+                if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD){
                     disableOverScroll();
                 }
 
                 scrollView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-                        if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_POINTER_DOWN) {
+                        if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_POINTER_DOWN){
                             inTouch = true;
-                        } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                        }else if(event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL){
                             inTouch = false;
                             //手指弹起以后检测一次是否需要复原位置
                             scrollView.post(checkStopped);
@@ -93,7 +91,7 @@ public class UITools {
                 scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
                     @Override
                     public void onScrollChanged() {
-                        if (!inTouch && scrollView != null && scrollView.getHandler() != null) {//如果持续滚动,移除checkStopped,停止滚动以后只执行一次检测任务
+                        if(!inTouch && scrollView!=null && scrollView.getHandler()!=null){//如果持续滚动,移除checkStopped,停止滚动以后只执行一次检测任务
                             scrollView.getHandler().removeCallbacks(checkStopped);
                             scrollView.postDelayed(checkStopped, 100);
                         }
@@ -108,11 +106,10 @@ public class UITools {
 
     /**
      * 利用父元素的Padding给HorizontalScrollView添加弹性
-     *
      * @param scrollView
      * @param padding
      */
-    public static void elasticPadding(final HorizontalScrollView scrollView, final int padding) {
+    public static void elasticPadding(final HorizontalScrollView scrollView, final int padding){
         Log.i("", "elasticPadding>>>>!!");
         View child = scrollView.getChildAt(0);
 
@@ -120,25 +117,25 @@ public class UITools {
         final int oldpt = child.getPaddingTop();
         final int oldpb = child.getPaddingBottom();
         //设置新的padding
-        child.setPadding(padding + oldpt, child.getPaddingTop(), padding + oldpb, child.getPaddingBottom());
+        child.setPadding(padding+oldpt, child.getPaddingTop(), padding+oldpb, child.getPaddingBottom());
 
         //添加视图布局完成事件监听
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             private boolean inTouch = false; //手指是否按下状态
 
             @SuppressLint("NewApi")
-            private void disableOverScroll() {
+            private void disableOverScroll(){
                 scrollView.setOverScrollMode(ScrollView.OVER_SCROLL_NEVER);
             }
 
             /**  滚动到左边 */
-            private void scrollToLeft() {
-                scrollView.smoothScrollTo(padding - oldpt, scrollView.getScrollY());
+            private void scrollToLeft(){
+                scrollView.smoothScrollTo(padding-oldpt, scrollView.getScrollY());
             }
 
             /** 滚动到底部 */
-            private void scrollToRight() {
-                scrollView.smoothScrollTo(scrollView.getChildAt(0).getRight() - scrollView.getMeasuredWidth() - padding + oldpb, scrollView.getScrollY());
+            private void scrollToRight(){
+                scrollView.smoothScrollTo(scrollView.getChildAt(0).getRight()-scrollView.getMeasuredWidth()-padding+oldpb, scrollView.getScrollY());
             }
 
             /** 检测scrollView结束以后,复原位置 */
@@ -146,10 +143,10 @@ public class UITools {
                 @Override
                 public void run() {
                     int x = scrollView.getScrollX();
-                    int bottom = scrollView.getChildAt(0).getRight() - x - scrollView.getMeasuredWidth();
-                    if (x <= padding && !inTouch) {
+                    int bottom = scrollView.getChildAt(0).getRight()-x-scrollView.getMeasuredWidth();
+                    if(x <= padding && !inTouch){
                         scrollToLeft();
-                    } else if (bottom <= padding && !inTouch) {
+                    }else if(bottom<=padding && !inTouch){
                         scrollToRight();
                     }
                 }
@@ -162,16 +159,16 @@ public class UITools {
                 scrollView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 
                 //取消overScroll效果
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
+                if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD){
                     disableOverScroll();
                 }
 
                 scrollView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-                        if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_POINTER_DOWN) {
+                        if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_POINTER_DOWN){
                             inTouch = true;
-                        } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                        }else if(event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL){
                             inTouch = false;
                             //手指弹起以后检测一次是否需要复原位置
                             scrollView.post(checkStopped);
@@ -184,7 +181,7 @@ public class UITools {
                     @Override
                     public void onScrollChanged() {
                         //如果持续滚动,移除checkStopped,停止滚动以后只执行一次检测任务
-                        if (!inTouch && scrollView != null && scrollView.getHandler() != null) {
+                        if(!inTouch && scrollView!=null && scrollView.getHandler()!=null){
                             scrollView.getHandler().removeCallbacks(checkStopped);
                             scrollView.postDelayed(checkStopped, 100);
                         }
