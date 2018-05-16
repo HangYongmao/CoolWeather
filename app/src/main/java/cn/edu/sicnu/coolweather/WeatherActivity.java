@@ -1,5 +1,6 @@
 package cn.edu.sicnu.coolweather;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -39,6 +41,7 @@ import cn.edu.sicnu.coolweather.service.AutoUpdateService;
 import cn.edu.sicnu.coolweather.tools.UITools;
 import cn.edu.sicnu.coolweather.util.HttpUtil;
 import cn.edu.sicnu.coolweather.util.Utility;
+import cn.edu.sicnu.coolweather.view.ArcMenu;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -80,9 +83,13 @@ public class WeatherActivity extends AppCompatActivity {
 
     Weather weather;
 
-    String titleName = "";
-    String titleTime = "";
-    String titleTmp = "";
+    static String titleName = "";
+    static String titleTime = "";
+    static String titleTmp = "";
+
+    private static Context instance;
+
+    private ArcMenu mArcMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +105,7 @@ public class WeatherActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         setContentView(R.layout.activity_weather);
+        instance = this;
 
         // 初始化各控件
         bingPicImg = (ImageView) findViewById(R.id.bing_pic_img);
@@ -125,7 +133,9 @@ public class WeatherActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navButton = (Button) findViewById(R.id.nav_button);
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        mArcMenu = findViewById(R.id.id_arc_menu);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+
         UITools.elasticPadding((HorizontalScrollView) findViewById(R.id.horizontalScrollView), 500);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
@@ -165,21 +175,34 @@ public class WeatherActivity extends AppCompatActivity {
         });
 
         // 悬浮菜单
-        FloatingActionButton fab_button = findViewById(R.id.fab_button);
-        fab_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), SettingActivity.class);
-                intent.putExtra("weather_temperature", titleTmp + "℃");
-                intent.putExtra("weather_time", titleTime);
-                intent.putExtra("weather_city", titleName);
-                Log.d(TAG, "onClick: " + titleTmp + "℃");
-                Log.d(TAG, "onClick: " + titleTime);
-                Log.d(TAG, "onClick: " + titleName);
-                startActivity(intent);
-            }
-        });
+//        ImageView fab_button = findViewById(R.id.fab_button);
+//        fab_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), SettingActivity.class);
+//                intent.putExtra("weather_temperature", titleTmp + "℃");
+//                intent.putExtra("weather_time", titleTime);
+//                intent.putExtra("weather_city", titleName);
+//                Log.d(TAG, "onClick: " + titleTmp + "℃");
+//                Log.d(TAG, "onClick: " + titleTime);
+//                Log.d(TAG, "onClick: " + titleName);
+//                startActivity(intent);
+//            }
+//        });
     }
+
+    // 启动设置界面
+    public static void startSetting() {
+        Intent intent = new Intent(instance, SettingActivity.class);
+        intent.putExtra("weather_temperature", titleTmp + "℃");
+        intent.putExtra("weather_time", titleTime);
+        intent.putExtra("weather_city", titleName);
+        Log.d(TAG, "onClick: " + titleTmp + "℃");
+        Log.d(TAG, "onClick: " + titleTime);
+        Log.d(TAG, "onClick: " + titleName);
+        instance.startActivity(intent);
+    }
+
 
     // 根据天气id请求城市天气信息
     public void requestWeather(final String weatherId) {

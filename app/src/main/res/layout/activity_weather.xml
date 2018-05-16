@@ -59,13 +59,15 @@
 
     </android.support.v4.widget.DrawerLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_margin="10dp"
-        android:src="@drawable/setting"
-        app:backgroundTint="@color/colorPrimary" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/fab_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|center"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:src="@drawable/setting"-->
+    <!--app:backgroundTint="@color/colorPrimary" />-->
+
+    <include layout="@layout/menu_right_bottom" />
 
 </FrameLayout>
