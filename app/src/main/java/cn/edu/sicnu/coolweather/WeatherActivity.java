@@ -32,6 +32,9 @@ import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -267,7 +270,8 @@ public class WeatherActivity extends AppCompatActivity implements MyScrollView.O
                 });
             }
         });
-        loadBingPic();
+//        loadBingPic();
+        loadRandomPic();
     }
 
     // 加载必应每日一图
@@ -294,6 +298,43 @@ public class WeatherActivity extends AppCompatActivity implements MyScrollView.O
             }
         });
     }
+
+    // 随机加载图片
+    String randomPic = "";
+    private void loadRandomPic() {
+        // 获取网络重定向文件的真实URL
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String str = "https://source.unsplash.com/random";
+                URL url = null;
+                try {
+                    url = new URL(str);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.getResponseCode();
+                    final String realUrl = conn.getURL().toString();
+                    conn.disconnect();
+                    Log.e("asd", "真实URL:" + realUrl);
+                    randomPic = realUrl;
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
+        editor.putString("bing_pic", randomPic);
+        editor.apply();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Glide.with(WeatherActivity.this).load(randomPic).into(bingPicImg);
+            }
+        });
+
+    }
+
 
     // 处理并展示Weather实体类中的数据
     private void showWeatherInfo(Weather weather) {
