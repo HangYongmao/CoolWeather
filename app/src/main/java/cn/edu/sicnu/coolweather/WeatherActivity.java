@@ -42,18 +42,19 @@ import cn.edu.sicnu.coolweather.tools.UITools;
 import cn.edu.sicnu.coolweather.util.HttpUtil;
 import cn.edu.sicnu.coolweather.util.Utility;
 import cn.edu.sicnu.coolweather.view.ArcMenu;
+import cn.edu.sicnu.coolweather.view.MyScrollView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class WeatherActivity extends AppCompatActivity {
+public class WeatherActivity extends AppCompatActivity implements MyScrollView.OnScrollListener {
 
     private static final String TAG = "WeatherActivity";
 
     public DrawerLayout drawerLayout;
     private Button navButton;
 
-    private ScrollView weatherLayout;
+    private MyScrollView weatherLayout;
     private TextView titleCity;
     private TextView titleUpdateTime;
     private TextView degreeText;
@@ -109,7 +110,7 @@ public class WeatherActivity extends AppCompatActivity {
 
         // 初始化各控件
         bingPicImg = (ImageView) findViewById(R.id.bing_pic_img);
-        weatherLayout = (ScrollView) findViewById(R.id.weather_layout);
+        weatherLayout = (MyScrollView) findViewById(R.id.weather_layout);
         titleCity = (TextView) findViewById(R.id.title_city);
         titleUpdateTime = (TextView) findViewById(R.id.title_update_time);
         degreeText = (TextView) findViewById(R.id.degree_text);
@@ -191,7 +192,7 @@ public class WeatherActivity extends AppCompatActivity {
 //        });
 
 
-        // ScrollView事件
+        // 点击空白处 收起卫星式菜单
         LinearLayout linearLayout = findViewById(R.id.linearLayout);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,7 +202,19 @@ public class WeatherActivity extends AppCompatActivity {
                 }
             }
         });
+
+        weatherLayout.setOnScrollListener(this);
     }
+
+    // ScrollView滚动事件
+    @Override
+    public void onScroll(int scrollY) {
+        if (mArcMenu.isOpen()) {
+            mArcMenu.toggleMenu(600);
+        }
+        Log.d(TAG, "onScroll: ");
+    }
+
 
     // 启动设置界面
     public static void startSetting() {
