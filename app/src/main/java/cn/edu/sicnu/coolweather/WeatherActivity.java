@@ -363,4 +363,16 @@ public class WeatherActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    // 点击空白处
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (mArcMenu.isOpen())
+                    mArcMenu.toggleMenu(600);
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 }
