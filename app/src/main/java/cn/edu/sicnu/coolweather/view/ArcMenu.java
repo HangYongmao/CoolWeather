@@ -181,8 +181,9 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
         if (mCButton == null) {
             mCButton = getChildAt(0);
         }
-        rotateCButton(view, 0f, 360f, 300);
+//        rotateCButton(view, 0f, 360f, 300);
         toggleMenu(150);
+        Log.d(TAG, "onClick: ");
     }
 
     public void toggleMenu(int duration) {

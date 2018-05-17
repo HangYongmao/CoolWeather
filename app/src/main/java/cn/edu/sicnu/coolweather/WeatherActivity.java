@@ -189,6 +189,18 @@ public class WeatherActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+
+
+        // ScrollView事件
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mArcMenu.isOpen()) {
+                    mArcMenu.toggleMenu(600);
+                }
+            }
+        });
     }
 
     // 启动设置界面
@@ -369,8 +381,9 @@ public class WeatherActivity extends AppCompatActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (mArcMenu.isOpen())
-                    mArcMenu.toggleMenu(600);
+                if (mArcMenu.isOpen()) {
+//                    mArcMenu.toggleMenu(600);
+                }
                 break;
         }
         return super.dispatchTouchEvent(ev);

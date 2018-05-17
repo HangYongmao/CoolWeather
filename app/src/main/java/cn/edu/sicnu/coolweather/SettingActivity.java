@@ -53,6 +53,8 @@ public class SettingActivity extends AppCompatActivity {
     String weather_time;
     String weather_city;
 
+    private static Context instance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,8 @@ public class SettingActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_setting);
+
+        instance = this;
 
         Button buttonBack = findViewById(R.id.back_button);
         buttonBack.setOnClickListener(new View.OnClickListener() {
@@ -185,6 +189,13 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent_game);
             }
         });
+
+    }
+
+    // 启动2048游戏
+    public static void startGame2048() {
+        Intent intent_game = new Intent(instance, GameMainActivity.class);
+        instance.startActivity(intent_game);
     }
 
     public void showNotification() {
