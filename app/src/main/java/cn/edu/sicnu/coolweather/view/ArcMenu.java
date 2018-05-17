@@ -17,9 +17,8 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 
 import cn.edu.sicnu.coolweather.R;
-import cn.edu.sicnu.coolweather.SettingActivity;
 import cn.edu.sicnu.coolweather.WeatherActivity;
-import cn.edu.sicnu.coolweather.gson.Weather;
+import cn.edu.sicnu.coolweather.game.game2018.Game2048Activity;
 
 /**
  * Created by HYM on 2018/5/15 0015.
@@ -35,7 +34,6 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
     private static final int POS_RIGHT_BOTTOM = 3;
     private Position mPosition = Position.RIGHT_BOTTOM;
     private int mRadius;
-
     // 菜单的状态
     private Status mCurrentStatus = Status.CLOSE;
 
@@ -259,6 +257,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
             childView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Log.d("pby123", "pby" + " " + pos);
                     if (mMenuItemClickListener != null) {
                         mMenuItemClickListener.onClick(childView, pos);
                     }
@@ -284,14 +283,24 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
             childView.setFocusable(false);
         }
         switch (pos) {
-            case 0:
+            case 0: {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         new WeatherActivity().startSetting();
                     }
                 }, 350);
                 break;
+            }
+            case 1: {
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        new WeatherActivity().startGame2048();
+                    }
+                }, 350);
+                break;
+            }
         }
+        Log.d(TAG, "menuItemAnim: " + pos);
     }
 
     private Animation scaleSmallAnim(int duration) {

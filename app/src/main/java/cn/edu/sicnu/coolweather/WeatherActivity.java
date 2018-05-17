@@ -6,14 +6,12 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,20 +22,19 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import cn.edu.sicnu.coolweather.game.game2018.Game2048Activity;
 import cn.edu.sicnu.coolweather.gson.Forecast;
 import cn.edu.sicnu.coolweather.gson.Weather;
 import cn.edu.sicnu.coolweather.service.AutoUpdateService;
@@ -299,8 +296,9 @@ public class WeatherActivity extends AppCompatActivity implements MyScrollView.O
         });
     }
 
-    // 随机加载图片
     String randomPic = "";
+
+    // 随机加载图片
     private void loadRandomPic() {
         // 获取网络重定向文件的真实URL
         new Thread(new Runnable() {
@@ -314,7 +312,7 @@ public class WeatherActivity extends AppCompatActivity implements MyScrollView.O
                     conn.getResponseCode();
                     final String realUrl = conn.getURL().toString();
                     conn.disconnect();
-                    Log.e("asd", "真实URL:" + realUrl);
+                    Log.e(TAG, "真实URL:" + realUrl);
                     randomPic = realUrl;
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -332,7 +330,6 @@ public class WeatherActivity extends AppCompatActivity implements MyScrollView.O
                 Glide.with(WeatherActivity.this).load(randomPic).into(bingPicImg);
             }
         });
-
     }
 
 
@@ -406,6 +403,14 @@ public class WeatherActivity extends AppCompatActivity implements MyScrollView.O
 
         Intent intent = new Intent(this, AutoUpdateService.class);
         startService(intent);
+    }
+
+    // 启动2048游戏
+    public  void startGame2048() {
+        Intent intent_game = new Intent(instance, Game2048Activity.class);
+        instance.startActivity(intent_game);
+//        Intent intent = instance.getPackageManager().getLaunchIntentForPackage("com.example.game2048");
+//        instance.startActivity(intent);
     }
 
     // 声明一个long类型变量：用于存放上一点击“返回键”的时刻

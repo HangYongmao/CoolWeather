@@ -22,7 +22,6 @@
             android:exported="true" />
 
         <activity android:name=".SettingActivity" />
-        <activity android:name=".game.GameMainActivity" />
         <activity android:name=".splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".guide.GuideActivity"></activity>
+        <activity android:name=".game.game2018.Game2048Activity"></activity>
     </application>
 
 </manifest>

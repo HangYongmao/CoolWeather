@@ -26,13 +26,13 @@
     <RelativeLayout
         android:id="@+id/fab_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:tag="Setting">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/setting_background"
-            android:tag="Setting" />
+            android:src="@drawable/setting_background" />
 
         <ImageView
             android:layout_width="26dp"
@@ -42,11 +42,23 @@
 
     </RelativeLayout>
 
-    <ImageView
+    <RelativeLayout
+        android:id="@+id/fab_game"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/composer_place"
-        android:tag="Place" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/setting_background"
+            android:tag="Place" />
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/game" />
+    </RelativeLayout>
 
     <ImageView
         android:layout_width="wrap_content"

@@ -1,35 +1,23 @@
 package cn.edu.sicnu.coolweather;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -40,8 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import cn.edu.sicnu.coolweather.game.GameMainActivity;
-import cn.edu.sicnu.coolweather.gson.Weather;
+import cn.edu.sicnu.coolweather.game.game2018.Game2048Activity;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -185,17 +172,11 @@ public class SettingActivity extends AppCompatActivity {
         game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_game = new Intent(view.getContext(), GameMainActivity.class);
+                Intent intent_game = new Intent(view.getContext(), Game2048Activity.class);
                 startActivity(intent_game);
             }
         });
 
-    }
-
-    // 启动2048游戏
-    public static void startGame2048() {
-        Intent intent_game = new Intent(instance, GameMainActivity.class);
-        instance.startActivity(intent_game);
     }
 
     public void showNotification() {
