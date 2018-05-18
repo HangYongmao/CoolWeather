@@ -38,6 +38,7 @@ import cn.edu.sicnu.coolweather.game.game2018.Game2048Activity;
 import cn.edu.sicnu.coolweather.gson.Forecast;
 import cn.edu.sicnu.coolweather.gson.Weather;
 import cn.edu.sicnu.coolweather.service.AutoUpdateService;
+import cn.edu.sicnu.coolweather.service.BackgroundMusicService;
 import cn.edu.sicnu.coolweather.tools.UITools;
 import cn.edu.sicnu.coolweather.util.HttpUtil;
 import cn.edu.sicnu.coolweather.util.Utility;
@@ -403,10 +404,13 @@ public class WeatherActivity extends AppCompatActivity implements MyScrollView.O
 
         Intent intent = new Intent(this, AutoUpdateService.class);
         startService(intent);
+
+        Intent intent_music = new Intent(WeatherActivity.this, BackgroundMusicService.class);
+        startService(intent_music);
     }
 
     // 启动2048游戏
-    public  void startGame2048() {
+    public void startGame2048() {
         Intent intent_game = new Intent(instance, Game2048Activity.class);
         instance.startActivity(intent_game);
 //        Intent intent = instance.getPackageManager().getLaunchIntentForPackage("com.example.game2048");

@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".WeatherActivity" />
 
         <service
@@ -29,8 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".guide.GuideActivity"></activity>
-        <activity android:name=".game.game2018.Game2048Activity"></activity>
+        <activity android:name=".guide.GuideActivity" />
+        <activity android:name=".game.game2018.Game2048Activity" />
+
+        <service
+            android:name=".service.BackgroundMusicService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote" />
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -29,8 +30,11 @@ import java.util.Date;
 import java.util.Locale;
 
 import cn.edu.sicnu.coolweather.game.game2018.Game2048Activity;
+import cn.edu.sicnu.coolweather.service.BackgroundMusicService;
 
 public class SettingActivity extends AppCompatActivity {
+
+    private static final String TAG = "SettingActivity";
 
     private TextView tv_cache;
     Notification.Builder builder;
@@ -177,6 +181,23 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+        // 打开和关闭背景音乐
+        Switch switch_music = findViewById(R.id.background_music);
+        switch_music.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Intent intent = new Intent(SettingActivity.this, BackgroundMusicService.class);
+                    startService(intent);
+                    Log.d(TAG, "onCheckedChanged: ");
+                } else {
+                    //非选中时 do some thing
+                    Intent intent = new Intent(SettingActivity.this, BackgroundMusicService.class);
+                    stopService(intent);
+                }
+            }
+        });
     }
 
     public void showNotification() {
