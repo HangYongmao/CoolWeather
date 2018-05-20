@@ -34,7 +34,6 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import cn.edu.sicnu.coolweather.game.game2018.Game2048Activity;
 import cn.edu.sicnu.coolweather.gson.Forecast;
 import cn.edu.sicnu.coolweather.gson.Weather;
 import cn.edu.sicnu.coolweather.service.AutoUpdateService;
@@ -268,8 +267,8 @@ public class WeatherActivity extends AppCompatActivity implements MyScrollView.O
                 });
             }
         });
-//        loadBingPic();
-        loadRandomPic();
+        loadBingPic();
+//        loadRandomPic();
     }
 
     // 加载必应每日一图
@@ -332,7 +331,6 @@ public class WeatherActivity extends AppCompatActivity implements MyScrollView.O
             }
         });
     }
-
 
     // 处理并展示Weather实体类中的数据
     private void showWeatherInfo(Weather weather) {
@@ -407,14 +405,6 @@ public class WeatherActivity extends AppCompatActivity implements MyScrollView.O
 
         Intent intent_music = new Intent(WeatherActivity.this, BackgroundMusicService.class);
         startService(intent_music);
-    }
-
-    // 启动2048游戏
-    public void startGame2048() {
-        Intent intent_game = new Intent(instance, Game2048Activity.class);
-        instance.startActivity(intent_game);
-//        Intent intent = instance.getPackageManager().getLaunchIntentForPackage("com.example.game2048");
-//        instance.startActivity(intent);
     }
 
     // 声明一个long类型变量：用于存放上一点击“返回键”的时刻

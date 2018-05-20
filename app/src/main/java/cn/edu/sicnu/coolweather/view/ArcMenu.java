@@ -18,7 +18,6 @@ import android.view.animation.TranslateAnimation;
 
 import cn.edu.sicnu.coolweather.R;
 import cn.edu.sicnu.coolweather.WeatherActivity;
-import cn.edu.sicnu.coolweather.game.game2018.Game2048Activity;
 
 /**
  * Created by HYM on 2018/5/15 0015.
@@ -287,14 +286,6 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         new WeatherActivity().startSetting();
-                    }
-                }, 350);
-                break;
-            }
-            case 1: {
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        new WeatherActivity().startGame2048();
                     }
                 }, 350);
                 break;

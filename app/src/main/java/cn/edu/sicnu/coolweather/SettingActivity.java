@@ -29,7 +29,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import cn.edu.sicnu.coolweather.game.game2018.Game2048Activity;
 import cn.edu.sicnu.coolweather.service.BackgroundMusicService;
 
 public class SettingActivity extends AppCompatActivity {
@@ -168,16 +167,6 @@ public class SettingActivity extends AppCompatActivity {
                     //非选中时 do some thing
                     closeNotification();
                 }
-            }
-        });
-
-        // 打开游戏
-        View game = findViewById(R.id.setting_game);
-        game.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_game = new Intent(view.getContext(), Game2048Activity.class);
-                startActivity(intent_game);
             }
         });
 
